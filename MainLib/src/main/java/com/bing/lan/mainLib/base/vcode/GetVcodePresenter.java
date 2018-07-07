@@ -77,7 +77,7 @@ public abstract class GetVcodePresenter<
 
             case ACTION_CHECK_VCODE:
                 HttpResult<Object> httpResult3 = (HttpResult<Object>) data;
-                int errorCode3 = httpResult3.getErrorCode();
+                int errorCode3 = httpResult3.getCode();
                 if (errorCode3 == HttpResult.HTTP_CODE_SUCCESS) {
                     //取消倒计时
                     releaseTask(0);

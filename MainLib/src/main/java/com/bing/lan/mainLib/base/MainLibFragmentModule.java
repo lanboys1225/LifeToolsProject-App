@@ -1,11 +1,10 @@
 package com.bing.lan.mainLib.base;
 
+import com.bing.lan.comm.api.HttpResult;
 import com.bing.lan.comm.mvp.BasePresenter;
 import com.bing.lan.comm.mvp.fragment.BaseFragmentModule;
-import com.bing.lan.mainLib.api.ResponseListDataResult;
-import com.bing.lan.mainLib.api.ResponseResult;
 
-import java.util.List;
+import java.util.Date;
 
 /**
  * @author 蓝兵
@@ -16,58 +15,23 @@ public abstract class MainLibFragmentModule extends BaseFragmentModule
     @Override
     public void onSuccess(int action, Object data) {
         if (presenter != null) {
-            ResponseResult<Object> result = (ResponseResult<Object>) data;
+            HttpResult<Object> result = (HttpResult<Object>) data;
             if (result == null) {
-                onError(action, new BasePresenter.MvpHttpException("ResponseResult 为空"));
+                onError(action, new BasePresenter.MvpHttpException("result 为空"));
                 return;
             }
 
-            String code = result.getCode();
-            String message = result.getMessage();
-            String debugmessage = result.getDebugmessage();
-            Long servicetime = result.getServicetime();
+            int code = result.getCode();
+            String message = result.getMsg();
+            Date resultTime = result.getTime();
 
             // 响应码不正确
-            if (!ResponseResult.REQUEST_CODE_SUCCESS.equals(code)) {
-                if (com.bing.lan.comm.app.AppConfig.LOG_DEBUG) {// 测试环境显示
-                    if (debugmessage != null && debugmessage.length() > 35) {
-                        debugmessage = debugmessage.substring(0, 35);
-                    }
-                    onError(action, new BasePresenter.MvpHttpException("\nhttp响应code不匹配, \ncode: "
-                            + code + ", \nmessage: " + message + ", \ndebugMessage: " + debugmessage));
-                } else {
-                    onError(action, new BasePresenter.MvpHttpException(message));
-                }
+            if (HttpResult.HTTP_CODE_SUCCESS != code) {
+                onError(action, new BasePresenter.MvpHttpException(message));
                 return;
             }
 
-            ResponseListDataResult<Object> resultData = result.getData();
-            //响应码正确, 数据为空
-            if (resultData == null) {
-                if (com.bing.lan.comm.app.AppConfig.LOG_DEBUG) {// 测试环境显示
-                    onError(action, new BasePresenter.MvpHttpException("ResponseListDataResult 为空"));
-                } else {
-                    onError(action, new BasePresenter.MvpHttpException("数据异常,请稍后再试.."));
-                }
-                return;
-            }
-
-            List<Object> list = resultData.getList();
-            //响应码正确, 数据列表为空
-            if (list == null || list.isEmpty()) {
-                if (com.bing.lan.comm.app.AppConfig.LOG_DEBUG) {// 测试环境显示
-                    onNoData(action, "没有更多的数据了哦..ResponseListDataResult 数据列表为空");
-                } else {
-                    onNoData(action, "没有更多的数据了哦..");
-                }
-                return;
-            }
-
-            resultData.setCode(code);
-            resultData.setMessage(message);
-            resultData.setDebugmessage(debugmessage);
-            resultData.setServicetime(servicetime);
-            presenter.onSuccess(action, resultData);
+            presenter.onSuccess(action, result.getData());
         }
     }
 }

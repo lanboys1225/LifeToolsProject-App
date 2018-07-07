@@ -28,6 +28,10 @@ public class UIRouterCons implements IConstants {
     public static final String MAIN_APP_AUTOWIRED_DESC = "首页书名";
 
     //    投资详情页面 ui 路由信息
+    public static final String LOGIN_ROUTE_NODE_PATH = "/login";
+    public static final String LOGIN_ROUTE_NODE_DESC = "登录页";
+
+    //    投资详情页面 ui 路由信息
     public static final String INVEST_DETAIL_ROUTE_NODE_PATH = "/detail";
     public static final String INVEST_DETAIL_ROUTE_NODE_DESC = "投资详情页";
 

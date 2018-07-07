@@ -1,21 +1,37 @@
 package com.bing.lan.mainLib.api;
 
+import com.bing.lan.comm.api.HttpResult;
+import com.bing.lan.mainLib.comm.bean.Groups;
+import com.bing.lan.mainLib.comm.bean.LoginRegisterResultBean;
+import com.bing.lan.mainLib.comm.bean.QueryDomain;
+
 import java.util.Map;
 
 import io.reactivex.Observable;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
-    ///**
-    // * 注册
-    // */
-    //@FormUrlEncoded
-    //@POST("user/iuser/login")
-    //Observable<ResponseResult<IUser>> login(@FieldMap Map<String, String> map);
-    //
+    /**
+     * 注册
+     */
+    @FormUrlEncoded
+    @POST("user/login")
+    Observable<HttpResult<LoginRegisterResultBean>> loginAndRegister(@FieldMap Map<String, String> map);
+
+    /**
+     * 群组列表
+     */
+    @GET("user/group/findAllGroupList")
+    Observable<HttpResult<QueryDomain<Groups>>> findAllGroupList(
+            @Query("currentPage") int currentPage,
+            @Query("pageSize") int pageSize
+    );
+
     /**
      * 获取验证码
      */
@@ -35,8 +51,8 @@ public interface ApiService {
     // */
     //@FormUrlEncoded
     //@POST("trade/order/repaysms")
-    //Observable<ResponseResult<Order>> getRePayOrderVcode(@FieldMap Map<String, String> map);
-    //
+    //Observable<ResponseResult<Order>> loginAndRegister(@FieldMap Map<String, String> map);
+
     ///**
     // * 获取支付验证码
     // */
