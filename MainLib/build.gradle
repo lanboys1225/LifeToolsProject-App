@@ -35,4 +35,6 @@ dependencies {
     api "com.android.support:design:$rootProject.supportLibraryVersion"
 
     api project(':CommLib')
+    api 'com.luojilab.ddcomponent:componentlib:1.0.0'
+
 }

@@ -7,5 +7,8 @@ import com.bing.lan.mainLib.base.MainLibFragment;
  */
 
 public interface UserService extends ComponentService {
+
     MainLibFragment getUserFragment();
+
+    MainLibFragment getGroupFragment();
 }

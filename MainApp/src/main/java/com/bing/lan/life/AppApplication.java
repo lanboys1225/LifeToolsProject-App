@@ -1,6 +1,8 @@
 package com.bing.lan.life;
 
 import com.bing.lan.comm.app.BaseApplication;
+import com.bing.lan.mainLib.cons.UIRouterCons;
+import com.luojilab.component.componentlib.router.ui.UIRouter;
 
 public class AppApplication extends BaseApplication {
 
@@ -8,7 +10,7 @@ public class AppApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
 
-        //UIRouter.getInstance().registerUI(APP_HOST);
+        UIRouter.getInstance().registerUI(UIRouterCons.APP_HOST);
 
         //如果isRegisterCompoAuto为false，则需要通过反射加载组件
         //        Router.registerComponent("com.luojilab.reader.applike.ReaderAppLike");

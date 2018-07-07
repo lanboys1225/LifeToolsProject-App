@@ -7,7 +7,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId rootProject.ext.applicationId
+//        applicationId "com.bing.lan.user"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
@@ -17,7 +17,7 @@ android {
         //得到 组件化 UiRouterTable 中使用到
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [host: "MainApp"]
+                arguments = [host: "UserApp"]
             }
         }
     }
@@ -27,6 +27,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    resourcePrefix "user_app_"
+
 }
 
 dependencies {
@@ -40,5 +43,5 @@ dependencies {
 combuild {
     isRegisterCompoAuto = true
 //    当isRegisterCompoAuto==true的时候是必须的 用于字节码插入(插入 IApplicationLike 注册代码)
-    applicationName = 'com.bing.lan.life.AppApplication'
+    applicationName = 'com.bing.lan.user.UserApplication'
 }
