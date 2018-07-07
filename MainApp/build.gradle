@@ -22,4 +22,6 @@ android {
 
 dependencies {
     implementation project(':MainLib')
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
+
 }

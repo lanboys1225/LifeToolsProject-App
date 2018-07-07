@@ -1,1 +1,6 @@
 include ':MainApp', ':MainLib', ':CommLib'
+
+
+include ':Android-crop',
+        ':Matisse',
+        ':LoadDataLayout'
